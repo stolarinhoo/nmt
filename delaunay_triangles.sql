@@ -1,4 +1,4 @@
-
+-- 1
 -- CONSTRAINED DELAUNAY TRIANGLES
 -- dump to (triangle z)
 create table temp_1 as (
@@ -13,6 +13,7 @@ As tin from nmt_1 a) as foo;
 select st_astext(geom) from temp_1 limit 5;
 
 
+-- 2
 -- DELAUNAY TRIANGLES
 -- creating geometry collection (polygon z)
 -- dump to (polygon z)
@@ -28,6 +29,7 @@ As tin from nmt_1 a) as foo;
 select st_astext(geom) from temp_2 limit 5;
 
 
+--3 
 -- DELAUNAY TRIANGLES
 -- creating tin
 -- dump to (triangle z)
