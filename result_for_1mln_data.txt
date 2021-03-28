@@ -1,0 +1,60 @@
+test2=#
+test2=#
+test2=#
+test2=# explain (analyze on, buffers on, summary on) select (st_dump(tin)).geom as geom from (
+test2(# select ST_ConstrainedDelaunayTriangles(ST_Union(a.geom))
+test2(# As tin from nmt_4 a) as foo;
+                                                             QUERY PLAN                                                 
+-------------------------------------------------------------------------------------------------------------------------------------
+ Result  (cost=31235.12..33752.89 rows=1000 width=32) (actual time=77193.930..81865.591 rows=2065513 loops=1)
+   Buffers: shared hit=18321
+   ->  ProjectSet  (cost=31235.12..31242.89 rows=1000 width=32) (actual time=77193.927..81537.232 rows=2065513 loops=1)
+         Buffers: shared hit=18321
+         ->  Aggregate  (cost=31235.12..31235.38 rows=1 width=32) (actual time=76938.790..76938.791 rows=1 loops=1)
+               Buffers: shared hit=18321
+               ->  Seq Scan on nmt_4 a  (cost=0.00..28652.29 rows=1033129 width=40) (actual time=5.434..78.103 rows=1033129 loops=1)
+                     Buffers: shared hit=18321
+ Planning Time: 0.067 ms
+ Execution Time: 82035.518 ms
+(10 rows)
+
+
+test2=#
+test2=#
+test2=# explain (analyze on, buffers on, summary on) select (st_dump(tin)).geom as geom from (
+test2(# select ST_DelaunayTriangles(ST_Union(a.geom), 0, 0)
+test2(# As tin from nmt_4 a) as foo;
+                                                             QUERY PLAN                                                 
+-------------------------------------------------------------------------------------------------------------------------------------
+ Result  (cost=31235.12..33777.64 rows=1000 width=32) (actual time=38343.123..42825.808 rows=2064822 loops=1)
+   Buffers: shared hit=18321
+   ->  ProjectSet  (cost=31235.12..31267.64 rows=1000 width=32) (actual time=38343.120..42514.833 rows=2064822 loops=1)
+         Buffers: shared hit=18321
+         ->  Aggregate  (cost=31235.12..31260.13 rows=1 width=32) (actual time=38043.063..38043.064 rows=1 loops=1)
+               Buffers: shared hit=18321
+               ->  Seq Scan on nmt_4 a  (cost=0.00..28652.29 rows=1033129 width=40) (actual time=5.035..71.937 rows=1033129 loops=1)
+                     Buffers: shared hit=18321
+ Planning Time: 0.081 ms
+ Execution Time: 42995.992 ms
+(10 rows)
+
+
+test2=#
+test2=#
+test2=# explain (analyze on, buffers on, summary on) select (st_dump(tin)).geom as geom from (
+test2(# select ST_DelaunayTriangles(ST_Union(a.geom), 0, 2)
+test2(# As tin from nmt_4 a) as foo;
+                                                             QUERY PLAN                                                 
+-------------------------------------------------------------------------------------------------------------------------------------
+ Result  (cost=31235.12..33777.64 rows=1000 width=32) (actual time=37466.552..41997.997 rows=2064822 loops=1)
+   Buffers: shared hit=18321
+   ->  ProjectSet  (cost=31235.12..31267.64 rows=1000 width=32) (actual time=37466.549..41686.111 rows=2064822 loops=1)
+         Buffers: shared hit=18321
+         ->  Aggregate  (cost=31235.12..31260.13 rows=1 width=32) (actual time=37229.733..37229.734 rows=1 loops=1)
+               Buffers: shared hit=18321
+               ->  Seq Scan on nmt_4 a  (cost=0.00..28652.29 rows=1033129 width=40) (actual time=5.737..74.705 rows=1033129 loops=1)
+                     Buffers: shared hit=18321
+ Planning Time: 0.074 ms
+ Execution Time: 42161.962 ms
+(10 rows)
+
